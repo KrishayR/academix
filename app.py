@@ -52,7 +52,7 @@ def popo():
 
 @app.route('/create')
 def create():
-    return render_template('teachers.html')
+    return render_template('teachers.html', lst=funcs)
 
 
 @app.route('/homework',  methods=["GET", "POST"])
@@ -101,6 +101,10 @@ def assessment():
 @app.route('/startassessment')
 def startassessment():
     return render_template('startassessment.html')
+
+@app.route('/signin')
+def signup():
+    return render_template('signup.html')
 
 if __name__ == "__main__":
     app.run(debug=True)

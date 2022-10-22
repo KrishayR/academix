@@ -3,7 +3,11 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<<<<<<< HEAD
     <link rel="stylesheet" href="../static/assets/teachers.css" />
+=======
+    <link rel="stylesheet" href="../static/assets/style.css" />
+>>>>>>> origin/main
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -12,6 +16,7 @@
     <script src="math.js" type="text/javascript"></script>
   </head>
   <body>
+<<<<<<< HEAD
     <!-- <h1 id="title">Teachers</h1>
     <p id="subheader">Tired of manually making tests and assigning homework? Finding ways to prevent cheating? Have AI do it all for you. Just enter in the topics you want to test and watch in amazement as AI generates challenging problems for each student in seconds.
     </p> -->
@@ -75,3 +80,75 @@
   </body>
 
 </html>
+=======
+    <h1 id="title">Teachers</h1>
+    <p id="subheader">Tired of manually making tests and assigning homework? Finding ways to prevent cheating? Have AI do it all for you. Just enter in the topics you want to test and watch in amazement as AI generates challenging problems for each student in seconds. To select more than one option, heres what you can do:
+
+      On Windows: Click options you want while holding control or shift, to select them. Note: unshift/uncontrol after clicking to avoid changes in the screen size.
+      On macOs: Click options you want while holding command or shift, to select them. Note: unshift/uncontrol after clicking to avoid changes in the screen size. 
+    </p>
+    <div class="frame">
+        <!-- <button type=button ONCLICK="alert('The feature to automatically generate tests has not been added yet. For now, please use the sample assesment. \nNote that it is completely possible and it is something we would like to work on in the future.\nThanks!')" class="custom-btn btn-6"><span>Generate New Test</span></button> -->
+        <button id = "makeTest"type=button class="custom-btn btn-6"><span>Generate New Test</span></button>
+    </div>
+    <div class = "frame2">
+        <select id = "testOpt" multiple>
+
+
+        </select>
+        <button id = "makeCode"> Click to make the test! </button>
+    </div>
+    <script>
+    $(".frame2").hide();
+    const lst = JSON.parse('{{ lst | tojson }}')
+
+    var thing = document.getElementById("makeTest");
+    thing.addEventListener('click', event => {
+      makeTest();
+    });
+
+    var otherThing = document.getElementById("makeCode");
+    otherThing.addEventListener('click', event => {
+      sendInfoAndMakeCode();
+    })
+
+
+    function makeTest(){
+      for (var i = 0; i < lst.length; i++){
+        const options = document.createElement('option');
+        var optionText = document.createTextNode(lst[i]);
+        options.appendChild(optionText);
+        options.setAttribute('value', lst[i]);
+        var select = document.querySelector('select');
+        select.appendChild(options);
+      }
+      $(".frame2").show();
+      $(".frame").hide();
+    }
+
+
+    function sendInfoAndMakeCode(){
+      var results = document.getElementById("testOpt");
+      var num1 = Math.floor(Math.random() *10);
+      var num2 = Math.floor(Math.random() *10);
+      var num3 = Math.floor(Math.random() *10);
+      var num4 = Math.floor(Math.random() *10);
+      var num5 = Math.floor(Math.random() *10);
+      var num6 = Math.floor(Math.random() *10);
+      $(".frame2").hide();
+      var code = (num1 * 100000) + (num2 * 10000) + (num3 * 1000) + (num4 * 100) + (num5 * 10) + num6;
+      var selected = [];
+      for (var option of document.getElementById("testOpt")){
+        if (option.selected){
+          selected.push(option.value);
+        }
+      }
+      console.log(selected);
+      $("body").html("<h1 style='color: firebrick' = id = 'text'> Your join code is " + code + ".");
+    }
+
+    </script>
+  </body>
+
+</html>
+>>>>>>> origin/main
