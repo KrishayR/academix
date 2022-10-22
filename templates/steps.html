@@ -74,6 +74,7 @@
             var label = "<label for='checkbox" + checkboxNum + "'><span>" + lst[i] + "</span> </label>";
             var div = "<div class='checkbox'>" + input + "" + label + "" + "</div>"
             $(".container").append(div);
+            console.log("#checkbox" + checkboxNum)
             checkboxNum++;
         }
       $(".frame2").show();
@@ -94,8 +95,10 @@
       var code = (num1 * 100000) + (num2 * 10000) + (num3 * 1000) + (num4 * 100) + (num5 * 10) + num6;
       var selected = [];
       for (var i = 1; i <= $('.container').find('div').length; i++){
-        if (document.getElementById("#checkbox" + i).value == 'checked'){
-            selected.push($("#checkbox" + i).value);
+        if ($("#checkbox" + i + ":checked").val() == lst[i-1]){
+            var thing = lst[i-1];
+            console.log(thing)
+            selected.push(thing);
         }
     }
     //   for (var option of document.getElementById("testOpt")){
