@@ -52,7 +52,7 @@ def popo():
 
 @app.route('/create')
 def create():
-    return render_template('teachers.html')
+    return render_template('teachers.html', lst=funcs)
 
 
 @app.route('/homework',  methods=["GET", "POST"])
