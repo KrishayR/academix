@@ -4,7 +4,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Academix</title>
-    <link rel="stylesheet" href="../static/assets/style.css" />
+    <link rel="stylesheet" href="../static/assets/assessment.css" />
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -108,9 +108,9 @@
           // load the next question
           function putQuestion() {
             document.getElementById('ptag').innerHTML = 'Tag: <span class="purple" id="tag"></span>'
-            document.getElementById('ptag').style.color = "#909CC2"
+            document.getElementById('ptag').style.color = "#fb8a8a"
             document.getElementById('incorrect').innerHTML = 'You have <span>' + 3 + '</span> attempts remaining'
-            document.getElementById('incorrect').style.color = "#eb3449"
+            document.getElementById('incorrect').style.color = "#fb8a8a"
             document.getElementById('tag').innerHTML = tags[position].tag;
   
             inputLabel.innerHTML = questions[position].question
