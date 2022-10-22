@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Academix</title>
+    <link rel="stylesheet" href="../static/assets/homework.css" />
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="../static/assets/favicon.ico">
+</head>
+<body>
+    <div class="frame" id="frame1">
+        <h1 id="title">1 new homework assignment has been generated!</h1>
+        <button onclick="getInput()" type=button class="custom-btn btn-6"><span>Start Homework</span></button>
+    </div>
+    <div id="frame2">
+        <h1 id="title">Solve the following problems</h1>
+        <p>Show all of your work.</p>
+        <h3>1) {{ name[0][0] }}</h3> 
+        <h3>2) {{ name[0][1] }}</h3> 
+        <h3>3) {{ name[0][2] }}</h3> 
+        <h3>4) {{ name[0][3] }}</h3> 
+        <h3>5) {{ name[0][4] }}</h3> 
+        <br>
+        <p>Done? Check your answers with this answer sheet. Remember, you will still need to show work on a scratch paper and turn it in to the teacher when it is due. If you use this answer sheet before you solve all of the problems, you will not recieve any credit for today's homework assignment.</p>
+        <div class="frame">
+            <button onclick="getInput2()" type=button class="custom-btn btn-6"><span>View Answer Sheet</span></button>
+        </div>
+    </div>
+    <div id="frame3">
+        <h3>1) {{ name[1][0] }}</h3> 
+        <h3>2) {{ name[1][1] }}</h3> 
+        <h3>3) {{ name[1][2] }}</h3> 
+        <h3>4) {{ name[1][3] }}</h3> 
+        <h3>5) {{ name[1][4] }}</h3> 
+    </div>
+    <script>
+        $("#frame1").show();
+        $("#frame2").hide();
+        $("#frame3").hide();
+
+        function getInput(){
+            $("#frame1").hide();
+            $("#frame2").show();
+            $("#frame3").hide();
+        }
+        function getInput2(){
+            $("#frame1").hide();
+            $("#frame2").show();
+            $("#frame3").show();
+        }
+    </script>
+    <script>
+        const len_missed_q = JSON.parse('{{ name[2] | tojson }}') * 2;
+
+        function dynamically(num){
+            for
+        }
+    </script>
+</body>
+</html>
