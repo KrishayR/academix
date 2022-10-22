@@ -1,0 +1,114 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../static/assets/steps.css" />
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+    <script src='http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.5/jquery-ui.min.js'></script>
+    <script src="math.js" type="text/javascript"></script>
+  </head>
+  <body>
+    <!-- <h1 id="title">Teachers</h1>
+    <p id="subheader">Tired of manually making tests and assigning homework? Finding ways to prevent cheating? Have AI do it all for you. Just enter in the topics you want to test and watch in amazement as AI generates challenging problems for each student in seconds.
+    </p> -->
+                    
+      <!-- multistep form -->
+        <form id="msform">
+          <!-- progressbar -->
+          <ul id="progressbar">
+            <li class="active">Choose Tags</li>
+            <li>Generate Join Code</li>
+            <li>Publish!</li>
+          </ul>
+          <!-- fieldsets -->
+          <fieldset>
+            <h2 class="fs-title">Choose Tags</h2>
+            <h3 class="fs-subtitle">Choose the tags you want our AI to generate questions from.</h3>
+            <div id="testOpt" class="container">
+
+            </div>
+            <input type="button" name="next" class="next action-button" onclick="sendInfoAndMakeCode()" value="Next" />
+          </fieldset>
+          <fieldset id="joincode">
+            <h2 class="fs-title">Generate Join Code</h2>
+            <h3 class="fs-subtitle">Generate the join code for the test and show it to your students.</h3>
+            <p id = "makeCode"> </p>
+            <input type="button" name="previous" class="previous action-button" value="Previous" />
+            <input type="button" name="next" class="next action-button" value="Next" />
+          </fieldset>
+          <fieldset>
+            <h2 class="fs-title">Publish!</h2>
+            <h3 class="fs-subtitle">Review your steps and publish!</h3>
+            <input type="text" name="fname" placeholder="First Name" />
+            <input type="text" name="lname" placeholder="Last Name" />
+            <input type="text" name="phone" placeholder="Phone" />
+            <textarea name="address" placeholder="Address"></textarea>
+            <input type="button" name="previous" class="previous action-button" value="Previous" />
+            <input type="submit" name="submit" class="submit action-button" value="Submit" />
+          </fieldset>
+        </form>
+    <script>
+    $(".frame2").hide();
+    const lst = JSON.parse('{{ lst | tojson }}')
+
+    // var thing = document.getElementById("makeTest");
+    // thing.addEventListener('click', event => {
+      makeTest();
+    // });
+
+    // var otherThing = document.getElementById("makeCode");
+    // otherThing.addEventListener('click', event => {
+    // })
+
+
+    function makeTest(){
+        var checkboxNum = 1;
+        for (var i = 0; i < lst.length; i++){
+            var optionText = document.createTextNode(lst[i]);
+            var input = "<input type='checkbox' id='checkbox" + checkboxNum + "'" + " name=" + optionText + " value=" + lst[i] + ">";
+            var label = "<label for='checkbox" + checkboxNum + "'><span>" + lst[i] + "</span> </label>";
+            var div = "<div class='checkbox'>" + input + "" + label + "" + "</div>"
+            $(".container").append(div);
+            checkboxNum++;
+        }
+      $(".frame2").show();
+      $(".frame").hide();
+    //   sendInfoAndMakeCode();
+    }
+
+
+    function sendInfoAndMakeCode(){
+      var results = document.getElementById("testOpt");
+      var num1 = Math.floor(Math.random() *10);
+      var num2 = Math.floor(Math.random() *10);
+      var num3 = Math.floor(Math.random() *10);
+      var num4 = Math.floor(Math.random() *10);
+      var num5 = Math.floor(Math.random() *10);
+      var num6 = Math.floor(Math.random() *10);
+      $(".frame2").hide();
+      var code = (num1 * 100000) + (num2 * 10000) + (num3 * 1000) + (num4 * 100) + (num5 * 10) + num6;
+      var selected = [];
+      for (var i = 1; i <= $('.container').find('div').length; i++){
+        if (document.getElementById("#checkbox" + i).value == 'checked'){
+            selected.push($("#checkbox" + i).value);
+        }
+    }
+    //   for (var option of document.getElementById("testOpt")){
+    //     if (option.selected){
+    //       selected.push(option.value);
+    //     }
+    //   }
+      console.log(selected);
+      $("#joincode").html("<h1 style='color: firebrick' id = 'text'> Your join code is " + code + ".");
+    }
+
+    </script>
+    <script src="../static/js/teachers.js"></script>
+  </body>
+
+</html>

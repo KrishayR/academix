@@ -1,9 +1,9 @@
 @font-face { 
-    font-family: mosk; src: url('../Mosk_Typeface/Mosk Bold 700.ttf'); 
+  font-family: mosk; src: url('../Mosk_Typeface/Mosk Bold 700.ttf'); 
 } 
 
 @font-face { 
-    font-family: hk-grotesk; src: url('../hk-grotesk/HKGrotesk-Medium.otf'); 
+  font-family: hk-grotesk; src: url('../hk-grotesk/HKGrotesk-Medium.otf'); 
 } 
 
 #title{
@@ -33,13 +33,13 @@ h2 {
 }
 
 p{
-  color: #909CC2;
+  color: #fb8a8a;
   font-family: hk-grotesk;
   text-align: center;
 }
 
 .purple{
-  color:#7F2CCB ;
+  color:#32243e;
   font-family: mosk;
   font-weight: strong; 
 }
@@ -60,7 +60,7 @@ button {
 
 body {
   margin: 0;
-  background: #9a75bd;
+  background: #695681;
   font-family: 'Roboto', sans-serif;
 }
 
@@ -73,8 +73,9 @@ h1 {
 
 #progress {
   position: absolute;
-  background: #7F2CCB;
-  height: 70vh;
+  background: #463457;
+  bottom: 300px;
+  height: 3vh;
   width: 0;
   transition: width 0.2s ease-in-out;
 }
@@ -91,7 +92,7 @@ h1 {
  ******/
 
 #register {
-  background: #fff;
+  background: #fb8a8a;
   position: relative;
   width: 410px;
   padding: 2px 15px 20px 15px;
@@ -112,12 +113,12 @@ h1 {
   right: 20px;
   bottom: 10px;
   font-size: 40px;
-  color: #7F2CCB;
+  color: #32243e;
   float: right;
   cursor: pointer;
 }
 .next:hover {color: #333}
-.wrong .next {color: #ff2d26}
+.wrong .next {color: #c93530}
 .close .next {color: #fff}
 
 #inputContainer {
@@ -142,29 +143,31 @@ h1 {
 #inputLabel {
   position: absolute;
   pointer-events: none;
+  color: #463457;
   top: 0;
   left: 0;
-  font-size: 20px;
+  font-size: 18px;
   font-weight: bold;
   padding: 0 5px;
   transition: .2s ease-in-out;
 }
 
 #inputContainer input:valid + #inputLabel {
-  top: -15px;
-  font-size: 11px;
-  font-weight: normal;
-  color: #9e9e9e;
+  top: -25px;
+  /* left: -16px; */
+  font-size: 14px;
+  font-weight: bold;
+  color: #463457;
 }
 
 #inputProgress {
   position: absolute;
-  border-bottom: 2px solid #7F2CCB;
+  border-bottom: 2px solid #32243e;
   padding: 3px 0;
   width: 0;
   transition: width .6s ease-in-out;
 }
 
 .wrong #inputProgress {
-  border-color: #ff2d26;
+  border-color: #c93530;
 }

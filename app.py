@@ -74,6 +74,10 @@ def populate():
 def index():
     return render_template('index.html')
 
+@app.route('/steps')
+def steps():
+    return render_template('steps.html', lst=funcs)
+
 @app.errorhandler(500)
 def page_not_found(e):
     return render_template('404.html'), 500
@@ -100,7 +104,4 @@ def startassessment():
 
 if __name__ == "__main__":
     app.run(debug=True)
-
-
-
 
