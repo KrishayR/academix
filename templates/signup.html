@@ -1,0 +1,100 @@
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Academix</title>
+        <link rel="stylesheet" href="../static/assets/homework.css" />
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
+        <link rel="icon" type="image/x-icon" href="../static/assets/favicon.ico">
+    </head>
+    <body>
+        <div id = "frame1"> 
+            <button id = "signup">Click here to create a new account.</button>
+            <button id = "signin">Click here to login to an old account.</button>
+
+
+
+        </div>
+
+        <div id = "frame2">
+            <form id="signupform">
+                <ul id = "progress">
+                    <li class = "active">Account Information</li>
+                    <li> Confirmation Check </li>
+                </ul>
+
+                <fieldset>
+                    <h2 class = "accountTitle">Create Account</h2>
+                    <input type="text" name="username" placeholder="Enter desired username here."/>
+                    <input type="password" name="pass" placeholder="Enter desired password here. "/>
+                    <input type = "password" name="confirm" placeholder="Reenter password. "/>
+                    <input type="text" name="email" placeholder="Enter email address."/>
+                    <input type="button" name="next" class="nextbutton" value = "Next"/>
+                </fieldset>
+
+                <fieldset>
+                    <h2 class = "verificationTitle">Verify Account</h2>
+                    <input type="text" name="verify" placeholder="Enter code from email sent. "/>
+                    <input type="button" name="submit" class="nextbutton" value="Submit"/>
+
+
+
+
+
+
+
+
+
+
+                </fieldset>
+
+
+
+
+            </form>
+
+        </div>
+
+
+        <div id = "frame3">
+
+
+        </div>
+
+
+
+
+
+
+
+
+        <script>
+            $("#frame2").hide();
+            $("#frame3").hide();
+            var thing = document.getElementById("signup");
+            thing.addEventListener('click', event => {
+                signup();
+            });
+
+            var other = document.getElementById("signin");
+            other.addEventListener('click', event => {
+                signin();
+            })
+
+            function signup(){
+
+            }
+
+            function signin();
+
+
+
+
+        </script>
+
+    </body>
+</html>
