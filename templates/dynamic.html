@@ -1,0 +1,274 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Academix</title>
+    <link rel="stylesheet" href="../static/assets/assessment.css" />
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="../static/assets/favicon.ico">
+  </head>
+  <body>
+    <br><br>
+    <p id="ptag"> Tag: <span class="purple" id="tag"></span></p>
+    <p id="incorrect"></p>
+    </div id="frame2">
+        <div class="frame2">
+            <div id="progress"></div>
+            <div class="center">
+            <div id="register">
+
+                <i id="progressButton" class="ion-android-arrow-forward next"><ion-icon name="arrow-forward-outline"></ion-icon></i>
+                <!-- <ion-icon name="arrow-forward-outline"></ion-icon> -->
+                <div id="inputContainer">
+                    <input id="inputField" required autofocus />
+                    <label id="inputLabel"></label>
+                    <div id="inputProgress"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- <div class="end">
+        <button onclick="location.href='teachers.html'" type=button class="custom-btn1 btn-5"><span>For Teachers</span></button>
+    </div> -->
+  </body>
+  <div id="script">
+    <script>
+      $("#frame1").show();
+      // var isolution = 0;
+      var remaining = 3
+      var correctlst = ["Correct!", "Great work!", "Great job!", "Keep it up!", "On a roll!"]
+      const question1 = JSON.parse('{{ assess[0][0] | tojson }}');
+      const question2 = JSON.parse('{{ assess[0][1] | tojson }}');
+      const question3 = JSON.parse('{{ assess[0][2] | tojson }}');
+  
+      const solution1 = JSON.parse('{{ assess[1][0] | tojson }}');
+      const solution2 = JSON.parse('{{ assess[1][1] | tojson }}');
+      const solution3 = JSON.parse('{{ assess[1][2] | tojson }}');
+  
+      const tag1 = JSON.parse('{{ assess[2][0] | tojson }}');
+      const tag2 = JSON.parse('{{ assess[2][1] | tojson }}');
+      const tag3 = JSON.parse('{{ assess[2][2] | tojson }}');
+
+  
+      var questions = [
+        {question: question1},
+        {question: question2},
+        {question: question3},
+      ]
+  
+      var solutions = [
+        {solution: solution1},
+        {solution: solution2},
+        {solution: solution3},
+      ]
+  
+      var tags = [
+        {tag: tag1},
+        {tag: tag2},
+        {tag: tag3},
+      ]
+      var missed = 0;
+      var missedq = [];  
+        (function(){
+        
+          var tTime = 100  // transition transform time from #register in ms
+          var wTime = 200  // transition width time from #register in ms
+          var eTime = 1000 // transition width time from inputLabel in ms
+        
+          // init
+          // --------------
+          var position = 0
+        
+          putQuestion()
+        
+          progressButton.addEventListener('click', validate)
+          inputField.addEventListener('keyup', function(e){
+            transform(0, 0) 
+            if(e.keyCode == 13) validate()
+          })
+        
+          // functions
+          // --------------
+        
+          // load the next question
+          function putQuestion() {
+            document.getElementById('ptag').innerHTML = 'Tag: <span class="purple" id="tag"></span>'
+            document.getElementById('ptag').style.color = "#fb8a8a"
+            document.getElementById('incorrect').innerHTML = 'You have <span>' + 3 + '</span> attempts remaining'
+            document.getElementById('incorrect').style.color = "#fb8a8a"
+            document.getElementById('tag').innerHTML = tags[position].tag;
+  
+            inputLabel.innerHTML = questions[position].question
+            inputField.value = ''
+            inputField.type = questions[position].type || 'text'  
+            inputField.focus()
+            showCurrent()
+          }
+          
+          // when all the questions have been answered
+          function done() {
+            $.ajax({
+              type: "POST",
+              url: "{{ url_for('populate') }}",
+              contentType: "application/json",
+              data: JSON.stringify(missedq),
+              dataType: "json",
+              success: function(response) {
+                  console.log(response);
+              },
+              error: function(err) {
+                  console.log(err);
+              }
+            });
+            // console.log(missedq)
+            // remove the box if there is no next question
+            register.className = 'close'
+            
+            // add the h1 at the end with the welcome text
+            var h1 = document.createElement('h2')
+            h1.appendChild(document.createTextNode('Done!'))
+            linebreak = document.createElement("br");
+            h1.appendChild(linebreak);
+            h1.appendChild(document.createTextNode('Generating homework...'));
+            
+            setTimeout(function() {
+              register.parentElement.appendChild(h1)     
+            setTimeout(function() {h1.style.opacity = 1}, 50)
+            }, eTime)
+            setTimeout(function(){
+              document.location.href = '/homework'
+            }, 4000);
+  
+          //   var h2 = document.createElement('h2')
+          //   linebreak = document.createElement("br");
+          //   h1.appendChild(linebreak);
+          //   h2.appendChild(document.createTextNode(' Generating homework questions'))
+          //   setTimeout(function() {
+          //     register.parentElement.appendChild(h2)     
+          //     setTimeout(function() {h2.style.opacity = 1}, 50)
+          //   }, eTime)
+            
+          }
+        
+          // when submitting the current question
+          function validate() {
+        
+            // set the value of the field into the array
+            questions[position].question = inputField.value
+            console.log(inputField.value)
+            // check if the pattern matches
+            if (inputField.value != solutions[position].solution){
+              if (inputField.value == "skip"){
+                    ok(function() {
+                      missedq.push(document.getElementById('tag').innerHTML)
+                  
+                  // set the progress of the background
+                  progress.style.width = ++position * 100 / questions.length + 'vw'
+            
+                  // if there is a new question, hide current and load next
+                  if (questions[position]) hideCurrent(putQuestion)
+                  else hideCurrent(done)
+                        
+                })
+              }
+              else wrong()
+            } 
+            else ok(function() {
+              document.getElementById('ptag').innerText = correctlst[Math.floor(Math.random() * correctlst.length)]
+              document.getElementById("ptag").style.color = '#2cab48';
+              function sleep(ms) {
+                  return new Promise(resolve => setTimeout(resolve, ms));
+              }
+              // set the progress of the background
+              progress.style.width = ++position * 100 / questions.length + 'vw'
+              // if there is a new question, hide current and load next
+              if (questions[position]) hideCurrent(putQuestion)
+              else hideCurrent(done)
+              // document.getElementById('correct').style.removeProperty( 'display' );
+
+              // document.getElementById('correct').innerText = correctlst[Math.floor(Math.random() * correctlst.length)]
+                    
+            })
+        
+          }
+        
+          // helper
+          // --------------
+        
+          function hideCurrent(callback) {
+            inputContainer.style.opacity = 0
+            inputProgress.style.transition = 'none'
+            inputProgress.style.width = 0
+            setTimeout(callback, wTime)
+          }
+
+          async function correctfunc(){
+            await sleep(5000);
+          }
+        
+          function showCurrent(callback) {
+            inputContainer.style.opacity = 1
+            inputProgress.style.transition = ''
+            inputProgress.style.width = '100%'
+            setTimeout(callback, wTime)
+          }
+        
+          function transform(x, y) {
+            register.style.transform = 'translate(' + x + 'px ,  ' + y + 'px)'
+          }
+        
+          function ok(callback) {
+            register.className = ''
+            setTimeout(transform, tTime * 0, 0, 10)
+            setTimeout(transform, tTime * 2, 0, 0)
+            setTimeout(callback,  tTime * 2)
+          }
+        
+          function wrong(callback) {
+            register.className = 'wrong'
+            remaining -= 1
+            if (remaining == 1){
+              document.getElementById('incorrect').innerHTML = 'You have <span>' + remaining + '</span> attempt remaining'
+            }else if (remaining <= 0){
+              ok(function() {
+                      missedq.push(document.getElementById('tag').innerHTML)
+                  
+                  // set the progress of the background
+                  progress.style.width = ++position * 100 / questions.length + 'vw'
+            
+                  // if there is a new question, hide current and load next
+                  if (questions[position]) hideCurrent(putQuestion)
+                  else hideCurrent(done)
+                        
+                })
+                remaining = 3
+            }else{
+              document.getElementById('incorrect').innerHTML = 'You have <span>' + remaining + '</span> attempts remaining'
+            }
+            // missed += 1
+            for(var i = 0; i < 6; i++) // shaking motion
+              setTimeout(transform, tTime * i, (i%2*2-1)*20, 0)
+            setTimeout(transform, tTime * 6, 0, 0)
+            setTimeout(callback,  tTime * 7)
+          }
+  
+          function getPython(){
+            var userObject = {
+              mode: 'genProblems',
+            }
+            $.ajax({
+              url: 'students.py',
+              data: userObject
+            })
+          }
+      }())
+  
+    </script>
+  </div>
+  <script src="../static/js/main.js"></script>
+  <script src="https://unpkg.com/ionicons@5.0.0/dist/ionicons.js"></script>
+</html>

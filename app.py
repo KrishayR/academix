@@ -98,9 +98,42 @@ def assessment():
 
     return render_template('assessment.html', assess=[problems, solutions, methods])
 
+@app.route('/joined', methods=["GET", "POST"])
+def joined():
+    problems = []
+    solutions = []
+    methods = []
+    print(request.method)
+    selected = request.get_json()
+    print(selected)
+    startassessmentv()
+
+
+
+
+    for i in range(1, len(selected)):
+        func = random.choice(funcs)
+        method = getattr(mathgen, func)
+        methods.append(func)
+
+        problem, solution = method()
+        problems.append(problem)
+        solutions.append(solution)
+
+    return render_template('dynamic.html', assess=[problems, solutions, methods])
+
 @app.route('/startassessment')
 def startassessment():
     return render_template('startassessment.html')
+
+@app.route('/startassessmentv')
+def startassessmentv():
+    return render_template('startassessmentv.html')
+
+
+# @app.route('/startassessmentv')
+# def startassessmentv():
+#     return render_template('startassessmentv.html')
 
 @app.route('/signin')
 def signup():

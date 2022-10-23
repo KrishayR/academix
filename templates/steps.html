@@ -37,21 +37,20 @@
           <fieldset id="joincode">
             <h2 class="fs-title">Generate Join Code</h2>
             <h3 class="fs-subtitle">Generate the join code for the test and show it to your students.</h3>
-            <p id = "makeCode"> </p>
+            <!-- <p id = "makeCode"> </p> -->
+            <h1 style='color: #fb8a8a' id = 'text' font='montserrat'> Your join code is <span id="code"></span>.</h1>
             <input type="button" name="previous" class="previous action-button" value="Previous" />
             <input type="button" name="next" class="next action-button" value="Next" />
           </fieldset>
-          <fieldset>
-            <h2 class="fs-title">Publish!</h2>
-            <h3 class="fs-subtitle">Review your steps and publish!</h3>
-            <input type="text" name="fname" placeholder="First Name" />
-            <input type="text" name="lname" placeholder="Last Name" />
-            <input type="text" name="phone" placeholder="Phone" />
-            <textarea name="address" placeholder="Address"></textarea>
+          <fieldset id="joincode">
+            <h2 id="done" class="fs-title">Done!</h2>
+            <h3 class="fs-subtitle">You can safely navigate away when you click Publish.</h3>
             <input type="button" name="previous" class="previous action-button" value="Previous" />
-            <input type="submit" name="submit" class="submit action-button" value="Submit" />
+            <input type="button" name="submit" onclick="done()" class="submit action-button" value="Publish!" />
           </fieldset>
         </form>
+
+
     <script>
     $(".frame2").hide();
     const lst = JSON.parse('{{ lst | tojson }}')
@@ -74,6 +73,7 @@
             var label = "<label for='checkbox" + checkboxNum + "'><span>" + lst[i] + "</span> </label>";
             var div = "<div class='checkbox'>" + input + "" + label + "" + "</div>"
             $(".container").append(div);
+            console.log("#checkbox" + checkboxNum)
             checkboxNum++;
         }
       $(".frame2").show();
@@ -81,6 +81,29 @@
     //   sendInfoAndMakeCode();
     }
 
+    function done() {
+            location.href = '/startassessmentv'
+            // document.getElementById("#done").innerHTML = "You may now safely exit the page."
+            $.ajax({
+              method: "POST",
+              type: "POST",
+              url: "{{ url_for('joined') }}",
+              contentType: "application/json",
+              data: JSON.stringify(selected2),
+              dataType: "json",
+              success: function(response) {
+                  console.log(response);
+              },
+              error: function(err) {
+                  console.log(err);
+              }
+        });
+
+        // location.href = '/joined'
+    }
+
+
+var selected2;
 
     function sendInfoAndMakeCode(){
       var results = document.getElementById("testOpt");
@@ -92,10 +115,14 @@
       var num6 = Math.floor(Math.random() *10);
       $(".frame2").hide();
       var code = (num1 * 100000) + (num2 * 10000) + (num3 * 1000) + (num4 * 100) + (num5 * 10) + num6;
+      code=390392
+      document.getElementById("code").innerHTML = code
       var selected = [];
       for (var i = 1; i <= $('.container').find('div').length; i++){
-        if (document.getElementById("#checkbox" + i).value == 'checked'){
-            selected.push($("#checkbox" + i).value);
+        if ($("#checkbox" + i + ":checked").val() == lst[i-1]){
+            var thing = lst[i-1];
+            console.log(thing)
+            selected.push(thing);
         }
     }
     //   for (var option of document.getElementById("testOpt")){
@@ -104,8 +131,10 @@
     //     }
     //   }
       console.log(selected);
-      $("#joincode").html("<h1 style='color: firebrick' id = 'text'> Your join code is " + code + ".");
+      // $("#joincode").html("<h1 style='color: #fb8a8a' id = 'text' font='montserrat'> Your join code is " + code + ".");
+        selected2 = selected;
     }
+  
 
     </script>
     <script src="../static/js/teachers.js"></script>
