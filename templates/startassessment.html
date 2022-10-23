@@ -22,10 +22,38 @@
         NOTE: If you do this, that question will be marked as incorrect and you may recieve homework based on that question.</p>
         <br>
         <div class="frame">
-          <button onclick="location.href='/assessment'" type=button class="custom-btn btn-6" style="text-align: center; justify-content: center;"><span>Start Assesment</span></button>
+          <button onclick="location.href='/assessment'" type=button class="custom-btn btn-6" style="text-align: center; justify-content: center;"><span>Start Assessment</span></button>
         </div>
     </div>
-  </div>
+    <div id="frame2" style="padding-left:100;padding-right:100;">
+        <h1 id = "title-b"> </h1><a style = "text-decoration:none; color: #7F2CCB;" href="/">Academix</a></h1>
+        <h3 style = "text-align:center; color: #909CC2; font-family:mosk;">Directions</h3> 
+        <button id = "sampleButton" type="button" class="custom-btn btn-6" style="text-align:center; justify-content: center;" onclick="sample()"><span>Take Sample Assessment</span></button>
+        <br>
+        <h2 id="or">OR</h2>
+        <button id="joinCodeButton" type="button" class="custom-btn btn-6" style="text-align:center; justify-content:center;" onclick="location.href='/startassessmentv'"><span>Enter Code</span></button>
+    </div>
   <script src="../static/js/main.js"></script>
-  <script src="https://unpkg.com/ionicons@5.0.0/dist/ionicons.js"></script>
+    <script src="https://unpkg.com/ionicons@5.0.0/dist/ionicons.js"></script>
+    <script>
+    $("#frame1").hide();
+    function sample(){
+      $("#frame1").show();
+      $("#frame2").hide();
+    }
+
+    function joinLobby(){
+      if (document.getElementById("#smth") == 390392){
+        location.href = '/startassessmentv';
+      } else{
+        alert("Error. Incorrect/invalid code.");
+      }
+    }
+
+
+
+
+
+
+  </script>
 </html>
