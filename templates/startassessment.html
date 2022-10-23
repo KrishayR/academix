@@ -12,6 +12,40 @@
     <link rel="icon" type="image/x-icon" href="../static/assets/favicon.ico">
   </head>
   <body>
+    <style>
+      body{
+        background-color: #695681;
+      }
+    </style>
+    <h1 style="text-align: center; font-family:mosk; color:#fb8a8a ">Assessment</h1>
+    <div id="frame1" style="padding-left: 100; padding-right: 100;">
+        <div class="frame">
+          <button id="sampleButton" type="button" class="custom-btn btn-6" style="text-align:center; font-size: 20px; justify-content: center; background-color:#fb8a8a;" onclick="location.href='/assessment'"><span>Take Sample Assessment</span></button>
+          <button id="joinCodeButton" type="button" class="custom-btn btn-6" style="text-align:center; font-size: 20px;  justify-content:center; background-color:#fb8a8a;" onclick="location.href='/startassessmentv'"><span>Enter Join Code</span></button>
+        </div>
+    </div>
+  </div>
+  <script src="../static/js/main.js"></script>
+  <script src="https://unpkg.com/ionicons@5.0.0/dist/ionicons.js"></script>
+</html>
+
+
+
+
+<!-- <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Academix</title>
+    <link rel="stylesheet" href="../static/assets/style.css" />
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="../static/assets/favicon.ico">
+  </head>
+  <body>
     <div id="frame1" style="padding-left: 100; padding-right: 100;">
         <h1 id="title-a"><a style="text-decoration:none; color: #7F2CCB;"href="/">Academix</a></h1>
         <h3 style="text-align: center; color: #909CC2; font-family: mosk;">Directions</h3> 
@@ -22,10 +56,38 @@
         NOTE: If you do this, that question will be marked as incorrect and you may recieve homework based on that question.</p>
         <br>
         <div class="frame">
-          <button onclick="location.href='/assessment'" type=button class="custom-btn btn-6" style="text-align: center; justify-content: center;"><span>Start Assesment</span></button>
+          <button onclick="location.href='/assessment'" type=button class="custom-btn btn-6" style="text-align: center; justify-content: center;"><span>Start Assessment</span></button>
         </div>
     </div>
-  </div>
+    <div id="frame2" style="padding-left:100;padding-right:100;">
+        <h1 id = "title-b"> </h1><a style = "text-decoration:none; color: #7F2CCB;" href="/">Academix</a></h1>
+        <h3 style = "text-align:center; color: #909CC2; font-family:mosk;">Directions</h3> 
+        <button id = "sampleButton" type="button" class="custom-btn btn-6" style="text-align:center; justify-content: center;" onclick="sample()"><span>Take Sample Assessment</span></button>
+        <br>
+        <h2 id="or">OR</h2>
+        <button id="joinCodeButton" type="button" class="custom-btn btn-6" style="text-align:center; justify-content:center;" onclick="location.href='/startassessmentv'"><span>Enter Code</span></button>
+    </div>
   <script src="../static/js/main.js"></script>
-  <script src="https://unpkg.com/ionicons@5.0.0/dist/ionicons.js"></script>
-</html>
+    <script src="https://unpkg.com/ionicons@5.0.0/dist/ionicons.js"></script>
+    <script>
+    $("#frame1").hide();
+    function sample(){
+      $("#frame1").show();
+      $("#frame2").hide();
+    }
+
+    function joinLobby(){
+      if (document.getElementById("#smth") == 390392){
+        location.href = '/startassessmentv';
+      } else{
+        alert("Error. Incorrect/invalid code.");
+      }
+    }
+
+
+
+
+
+
+  </script>
+</html> -->
