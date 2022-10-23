@@ -1,8 +1,7 @@
 # academix
 
 https://devpost.com/software/academix?ref_content=user-portfolio&ref_feature=in_progress
-
-www.academix2-ai.herokuapp.com
+https://academix2-ai.herokuapp.com/
 
 ## Inspiration ##
 
