@@ -36,7 +36,7 @@ isolution = 0
 def popu():
     hwproblems = []
     hwsolutions = []
-    for i in range(1, len_missed_q*2):
+    for i in range(1, 6):
         func = random.choice(missed_q)
         method = getattr(mathgen, func)
         hwproblem, hwsolution = method()
@@ -98,23 +98,24 @@ def assessment():
 
     return render_template('assessment.html', assess=[problems, solutions, methods])
 
-@app.route('/joined', methods=["GET", "POST"])
+@app.route('/o2y3i58jhui2o98y723hnui39', methods=["GET", "POST"])
 def joined():
+    global selected
+    try:
+        print(request.method)
+        selected = request.get_json()
+        print(selected)
+    except:
+        pass
+
+@app.route('/joined')
+def dynamic():
     problems = []
     solutions = []
     methods = []
-    print(request.method)
-    selected = request.get_json()
-    print(selected)
-    startassessmentv()
-
-
-
-
-    for i in range(1, len(selected)):
-        func = random.choice(funcs)
-        method = getattr(mathgen, func)
-        methods.append(func)
+    for i in range(0, len(selected)):
+        method = getattr(mathgen, selected[i])
+        methods.append(selected[i])
 
         problem, solution = method()
         problems.append(problem)
